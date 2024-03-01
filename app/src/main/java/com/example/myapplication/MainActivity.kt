@@ -14,5 +14,6 @@ class MainActivity : AppCompatActivity() {
 
         //db.actualizarTabla()
         db.leerdatos()
+      //  db.borrarDatos()
     }
 }
