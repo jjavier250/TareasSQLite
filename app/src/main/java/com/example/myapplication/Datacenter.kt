@@ -11,8 +11,10 @@ class Datacenter(context: Context):SQLiteOpenHelper(context, DATABASE_NAME,null,
 
     companion object{
         const val DATABASE_NAME= "to_do_app.db"
-        const val DATABASE_VERSION= 1  // la primera vez va a valer 1
+        const val DATABASE_VERSION= 1  // la primera vez va a valer 1, si subimos la versión a 2 el va a llamar al metodo y borra y vuelve a crear la tabla, Esto es por si añadimos una columna nueva
 
+
+        // siempre hay que hacer los create tables si tengo 20 pues 20 por que esta en local
         private const val SQL_CREATE_TABLE =
             "CREATE TABLE Task (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
