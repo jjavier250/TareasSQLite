@@ -74,7 +74,7 @@ class Datacenter(context: Context):SQLiteOpenHelper(context, DATABASE_NAME,null,
 
          val cursor = db.query(
              "Task",   // The table to query
-             arrayOf("id","task","done"),             // The array of columns to return (pass null to get all)
+             arrayOf("id","task","done"),         // si pongo null es como poner * que te trae todas las columnas
              null,              // The columns for the WHERE clause
              null,          // The values for the WHERE clause
              null,                   // don't group the rows
