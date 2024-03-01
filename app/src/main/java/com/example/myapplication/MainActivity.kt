@@ -8,7 +8,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var db:Datacenter= Datacenter(this)
+        val db:Datacenter= Datacenter(this)
 
         db.insertarTabla()
 
