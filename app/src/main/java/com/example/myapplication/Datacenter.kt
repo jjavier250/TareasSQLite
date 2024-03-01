@@ -110,7 +110,7 @@ class Datacenter(context: Context):SQLiteOpenHelper(context, DATABASE_NAME,null,
         val values=ContentValues()
         values.put("done",true) // campo a actualizar
 
-        var updatetable = db.update("Task",  values,"id=? or id=?", arrayOf("1","3"))
+        val updatetable = db.update("Task",  values,"id=? or id=?", arrayOf("1","3"))
        // var updatetable = db.update("Task",  values,"id in (1,3)", null) otra manera de haverlo son los ?
 
         Log.i("DATABASE","REGISTROS ACTUALIZADOS:$updatetable")
