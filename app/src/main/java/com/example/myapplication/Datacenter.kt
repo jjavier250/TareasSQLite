@@ -65,6 +65,7 @@ class Datacenter(context: Context):SQLiteOpenHelper(context, DATABASE_NAME,null,
 
         newRowId = db.insert("Task", null, values)
 
+        Log.i("DATABASE","insertadas:$newRowId")
     }
 
      @SuppressLint("Range") // para omitir errores
