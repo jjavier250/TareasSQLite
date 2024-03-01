@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -51,8 +52,20 @@ class Datacenter(context: Context):SQLiteOpenHelper(context, DATABASE_NAME,null,
         values.put("done",false)
 
         newRowId = db.insert("Task", null, values)
+
+        values.put("task","Poner la lavadora")
+        values.put("done",false)
+
+        newRowId = db.insert("Task", null, values)
+
+        values.put("task","Pasar revisión")
+        values.put("done",false)
+
+        newRowId = db.insert("Task", null, values)
+
     }
 
+     @SuppressLint("Range") // para omitir errores
      fun leerdatos(){
 
          val db=writableDatabase
@@ -67,14 +80,17 @@ class Datacenter(context: Context):SQLiteOpenHelper(context, DATABASE_NAME,null,
              "done desc"               // The sort order
          )
 
+         // al leer los datos por las columnas 0,1,2 en el mismo orden de arriba
          if (cursor.moveToFirst()){
 
              do{
-                 val task=cursor.getString(0)
-                 val done=cursor.getInt(1)==1
+                 val id=cursor.getInt(0)  // opcion por indice
+                // val id=cursor.getString(cursor.getColumnIndex("id")) // opcion 2 por nombre
+                 val task=cursor.getString(1)
+                 val done=cursor.getInt(2)==1
 
                  //pinto
-                 Log.i("DATABASE"," -> Task:$task,done:$done")
+                 Log.i("DATABASE","$id -> Task:$task,done:$done")
 
              }while(cursor.moveToNext())
                 cursor.close()
@@ -85,10 +101,25 @@ class Datacenter(context: Context):SQLiteOpenHelper(context, DATABASE_NAME,null,
     fun actualizarTabla(){
 
         val db=writableDatabase
+        // metodo antiguo
+       // db.execSQL("UPDATE Task set task='comprar leche',done=true WHERE id=1")
 
         val values=ContentValues()
-        values.put("done",true)
+        values.put("done",true) // campo a actualizar
 
-        var updatetable = db.update("Task",  values)
+        var updatetable = db.update("Task",  values,"id=? or id=?", arrayOf("1","3"))
+       // var updatetable = db.update("Task",  values,"id in (1,3)", null) otra manera de haverlo son los ?
+
+        Log.i("DATABASE","REGISTROS ACTUALIZADOS:$updatetable")
+    }
+
+
+    fun borrarDatos(){
+
+        val db=writableDatabase
+
+        val borraFilas=db.delete("Task","id=1",null)
+
+        Log.i("DATABASE","Registros borrados$borraFilas")
     }
  }

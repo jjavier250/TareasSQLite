@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
         var db:Datacenter= Datacenter(this)
 
         db.insertarTabla()
+
+        //db.actualizarTabla()
         db.leerdatos()
     }
 }
